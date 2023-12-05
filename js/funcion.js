@@ -176,8 +176,7 @@ const eliminarMedicamento = async (idMedicamento) => {
             throw new Error(`Error al eliminar. Código de respuesta: ${response.status}`);
         }
 
-        const json = await response.json();
-        alert(json.msg)
+        const json = await response.json();       
         Swal.fire({
             position: "center",
             icon: "success",
