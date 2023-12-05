@@ -73,6 +73,14 @@ const registrarMedicamento = () => {
         })
             .then((res) => res.json())
             .then(json => {
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: (json.msg),
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+
                 setTimeout(() => {
                     regresarListar();
                 }, 1000);
@@ -122,6 +130,14 @@ const actualizarMedicamento = () => {
         })
             .then((res) => res.json())
             .then(json => {
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: (json.msg),
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+
                 setTimeout(() => {
                     regresarListar();
                 }, 1000);
@@ -162,6 +178,14 @@ const eliminarMedicamento = async (idMedicamento) => {
 
         const json = await response.json();
         alert(json.msg)
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: (json.msg),
+            showConfirmButton: false,
+            timer: 1500
+        });
+
         setTimeout(() => {
             regresarListar();
         }, 1000);
@@ -174,14 +198,27 @@ const eliminarMedicamento = async (idMedicamento) => {
 
 };
 function confirmarEliminar(idMedicamento) {
-    const confirmacion = confirm('¿Estás seguro de que deseas Dar de baja?');
 
-    if (confirmacion) {
-        eliminarMedicamento(idMedicamento);
-    } else {
-        console.log('Dar de baja cancelada por el usuario.');
-    }
+
+    Swal.fire({
+        title: "¿Estás seguro de que deseas eliminar este Acudiente?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Aceptar"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            eliminarMedicamento(idMedicamento);
+        }
+    });
+
+
+
 }
+
+
+
 
 if (document.querySelector('#btnRegistrar')) {
     document.querySelector('#btnRegistrar')
